@@ -22,7 +22,9 @@ const scoreB = {
 
 export function part1(strategy) {
   return sum(
-    strategy.map(([a, b]) => outcomes[a][b] + (b === 'X' ? ROCK : b === 'Y' ? PAPER : SCIZZORS))
+    strategy.map(
+      ([a, b]) => outcomes[a][b] + (b === 'X' ? ROCK : b === 'Y' ? PAPER : SCIZZORS),
+    ),
   );
 }
 

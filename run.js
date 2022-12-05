@@ -17,8 +17,8 @@ async function main() {
   const preparedInput = mod.prepare(
     await readFile(
       `./${year}/${day.padStart(2, '0')}/${testFlagIndex !== -1 ? 'test' : 'input'}.txt`,
-      { encoding: 'utf8' }
-    )
+      { encoding: 'utf8' },
+    ),
   );
 
   console.log(`Part 1: ${mod.part1(preparedInput)}`);

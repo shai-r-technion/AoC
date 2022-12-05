@@ -9,7 +9,7 @@ export function part2(elves) {
     elves
       .map(sum)
       .sort((a, b) => b - a)
-      .slice(0, 3)
+      .slice(0, 3),
   );
 }
 
