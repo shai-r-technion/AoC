@@ -3,6 +3,8 @@
 import { argv } from 'node:process';
 import { readFile } from 'node:fs/promises';
 
+const id = (x) => x;
+
 async function main() {
   let testFlagIndex = argv.indexOf('--test');
   if (testFlagIndex === -1) testFlagIndex = argv.indexOf('-t');
@@ -14,7 +16,7 @@ async function main() {
 
   const mod = await import(`./${year}/${day.padStart(2, '0')}/solution.js`);
 
-  const preparedInput = mod.prepare(
+  const preparedInput = (mod.prepare ?? id)(
     await readFile(
       `./${year}/${day.padStart(2, '0')}/${testFlagIndex !== -1 ? 'test' : 'input'}.txt`,
       { encoding: 'utf8' },
