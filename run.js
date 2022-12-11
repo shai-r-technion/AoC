@@ -24,7 +24,7 @@ async function main() {
   );
 
   console.log(`Part 1: ${mod.part1(preparedInput)}`);
-  console.log(`Part 1: ${mod.part2(preparedInput)}`);
+  console.log(`Part 2: ${mod.part2(preparedInput)}`);
 }
 
 main();
