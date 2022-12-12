@@ -7,47 +7,38 @@ const max2product = (arr) => {
   return a * b;
 };
 
-export function part1(monkeys) {
-  const items = monkeys.map((m) => [...m.startingItems]);
-  const inspects = Array(monkeys.length).fill(0);
+const business = (monkeys, rounds, modifier) => {
+  monkeys.forEach((m) => (m.inspects = 0));
 
-  for (let r = 0; r < 20; ++r) {
-    for (let m = 0; m < items.length; ++m) {
-      inspects[m] += items[m].length;
-      while (items[m].length) {
-        const item = items[m].shift();
-        const worry = Math.floor(monkeys[m].operation(item) / 3);
-        items[monkeys[m].test[worry % monkeys[m].test.c === 0]].push(worry);
+  for (let r = 0; r < rounds; ++r) {
+    for (const mon of monkeys) {
+      mon.inspects += mon.items.length;
+      while (mon.items.length) {
+        const item = mon.items.shift();
+        const worry = modifier(mon.operation(item));
+        monkeys[mon.test[worry % mon.test.c === 0]].items.push(worry);
       }
     }
   }
-  return max2product(inspects);
+
+  return max2product(monkeys.map((m) => m.inspects));
+};
+
+export function part1(monkeys) {
+  return business(monkeys, 20, (worry) => Math.floor(worry / 3));
 }
 
 export function part2(monkeys) {
-  const items = monkeys.map((m) => [...m.startingItems]);
-  const inspects = Array(monkeys.length).fill(0);
+  const mod = monkeys.reduce((a, m) => a * m.test.c, 1);
 
-  const mod = monkeys.reduce((a, c) => a * c.test.c, 1);
-
-  for (let r = 0; r < 10000; ++r) {
-    for (let m = 0; m < items.length; ++m) {
-      inspects[m] += items[m].length;
-      while (items[m].length) {
-        const item = items[m].shift();
-        const worry = monkeys[m].operation(item) % mod;
-        items[monkeys[m].test[worry % monkeys[m].test.c === 0]].push(worry);
-      }
-    }
-  }
-  return max2product(inspects);
+  return business(monkeys, 10_000, (worry) => worry % mod);
 }
 
 export function prepare(input) {
   return input.split('\n\n').map((m) => {
     const split = m.split('\n');
     return {
-      startingItems: split[1]
+      items: split[1]
         .split(':')[1]
         .slice(1)
         .split(', ')

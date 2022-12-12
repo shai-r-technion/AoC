@@ -1,7 +1,4 @@
-const cloneCrates = (a) => a.slice(0).map((b) => b.slice(0));
-
 export function part1({ crates, instructions }) {
-  crates = cloneCrates(crates);
   for (const inst of instructions)
     crates[inst.to - 1].push(...crates[inst.from - 1].splice(-inst.count).reverse());
 
@@ -9,7 +6,6 @@ export function part1({ crates, instructions }) {
 }
 
 export function part2({ crates, instructions }) {
-  crates = cloneCrates(crates);
   for (const inst of instructions)
     crates[inst.to - 1].push(...crates[inst.from - 1].splice(-inst.count));
 
