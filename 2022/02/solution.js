@@ -15,9 +15,9 @@ const outcomes = {
 };
 
 const scoreB = {
-  A: { X: LOST + SCIZZORS, Y: DRAW + ROCK, Z: WIN + PAPER },
-  B: { X: LOST + ROCK, Y: DRAW + PAPER, Z: WIN + SCIZZORS },
-  C: { X: LOST + PAPER, Y: DRAW + SCIZZORS, Z: WIN + ROCK },
+  A: { X: LOSE + SCIZZORS, Y: DRAW + ROCK, Z: WIN + PAPER },
+  B: { X: LOSE + ROCK, Y: DRAW + PAPER, Z: WIN + SCIZZORS },
+  C: { X: LOSE + PAPER, Y: DRAW + SCIZZORS, Z: WIN + ROCK },
 };
 
 export function part1(strategy) {
