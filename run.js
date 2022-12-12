@@ -16,15 +16,13 @@ async function main() {
 
   const mod = await import(`./${year}/${day.padStart(2, '0')}/solution.js`);
 
-  const preparedInput = (mod.prepare ?? id)(
-    await readFile(
-      `./${year}/${day.padStart(2, '0')}/${testFlagIndex !== -1 ? 'test' : 'input'}.txt`,
-      { encoding: 'utf8' },
-    ),
+  const inputFile = await readFile(
+    `./${year}/${day.padStart(2, '0')}/${testFlagIndex !== -1 ? 'test' : 'input'}.txt`,
+    { encoding: 'utf8' },
   );
 
-  console.log(`Part 1: ${mod.part1(preparedInput)}`);
-  console.log(`Part 2: ${mod.part2(preparedInput)}`);
+  console.log(`Part 1: ${mod.part1((mod.prepare ?? id)(inputFile))}`);
+  console.log(`Part 2: ${mod.part2((mod.prepare ?? id)(inputFile))}`);
 }
 
 main();
