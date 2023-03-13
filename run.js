@@ -49,8 +49,9 @@ async function main() {
     { encoding: 'utf8' },
   );
 
-  console.log(`Part 1: ${mod.part1((mod.prepare ?? id)(inputFile))}`);
-  console.log(`Part 2: ${mod.part2((mod.prepare ?? id)(inputFile))}`);
+  console.log(`${year} Day ${day}:`);
+  console.log(` Part 1: ${mod.part1((mod.prepare ?? id)(inputFile))}`);
+  console.log(` Part 2: ${mod.part2((mod.prepare ?? id)(inputFile))}`);
 }
 
 main();
