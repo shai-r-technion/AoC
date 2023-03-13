@@ -35,17 +35,18 @@ async function resolveDate(argv) {
 }
 
 async function main() {
+  let test = false;
   let testFlagIndex = argv.indexOf('--test');
-  if (testFlagIndex !== -1) argv.splice(testFlagIndex, 1);
+  if ((test ||= testFlagIndex !== -1)) argv.splice(testFlagIndex, 1);
   testFlagIndex = argv.indexOf('-t');
-  if (testFlagIndex !== -1) argv.splice(testFlagIndex, 1);
+  if ((test ||= testFlagIndex !== -1)) argv.splice(testFlagIndex, 1);
 
   const { day, year } = await resolveDate(argv);
 
   const mod = await import(`./${year}/${String(day).padStart(2, '0')}/solution.js`);
 
   const inputFile = await readFile(
-    `./${year}/${String(day).padStart(2, '0')}/${testFlagIndex !== -1 ? 'test' : 'input'}.txt`,
+    `./${year}/${String(day).padStart(2, '0')}/${test ? 'test' : 'input'}.txt`,
     { encoding: 'utf8' },
   );
 
