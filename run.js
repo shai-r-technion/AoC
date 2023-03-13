@@ -36,8 +36,9 @@ async function resolveDate(argv) {
 
 async function main() {
   let testFlagIndex = argv.indexOf('--test');
-  if (testFlagIndex === -1) testFlagIndex = argv.indexOf('-t');
-  if (testFlagIndex !== -1) argv.splice(testFlagIndex);
+  if (testFlagIndex !== -1) argv.splice(testFlagIndex, 1);
+  testFlagIndex = argv.indexOf('-t');
+  if (testFlagIndex !== -1) argv.splice(testFlagIndex, 1);
 
   const { day, year } = await resolveDate(argv);
 
